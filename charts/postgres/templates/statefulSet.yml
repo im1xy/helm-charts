@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.statefulset.name }}
+  labels:
+    app: {{ .Values.statefulset.name }}
+spec:
+  replicas: {{ .Values.statefulset.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.statefulset.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.statefulset.name }}
+    spec:
+      containers:
+        - name: {{ .Values.statefulset.name }}
+          image: "{{ .Values.statefulset.image.name }}:{{ .Values.statefulset.image.tag }}"
+          envFrom:
+            - secretRef:
+                name: {{ .Values.sealedSecret.name }}
+            - configMapRef:
+                name: {{ .Values.configMap.name }}
+          volumeMounts:
+            - name: {{ .Values.statefulset.volumeMounts.name }}
+              mountPath: {{ .Values.statefulset.volumeMounts.mountPath }}
+          resources:
+            limits:
+              memory: {{ .Values.statefulset.limits.memory }}
+              cpu: {{ .Values.statefulset.limits.cpu }}
+          ports:
+            - containerPort: {{ .Values.statefulset.containerPort }}
+      volumes:
+        - name: {{ .Values.statefulset.volumeMounts.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistantVolumeClaim.name }}

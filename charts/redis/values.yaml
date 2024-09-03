@@ -1,0 +1,13 @@
+deployment:
+  name: redis
+  replicas: '1'
+  image:
+    name: redis
+    tag: 7.4.0
+  containerPort: '6379'
+  limits:
+    memory: 128Mi
+    cpu: 500m
+clusterIP:
+  name: redis
+  targetPort: '6379'

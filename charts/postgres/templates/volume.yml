@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.persistantVolume.name }}
+spec:
+  capacity:
+    storage: {{ .Values.persistantVolume.capacity.storage }}
+  volumeMode: {{ .Values.persistantVolume.volumeMode }}
+  accessModes: {{ .Values.persistantVolume.accessModes }}
+  persistentVolumeReclaimPolicy: {{ .Values.persistantVolume.reclaimPolicy }}
+  storageClassName: {{ .Values.persistantVolume.storageClassName }}
+  nfs:
+    server: {{ .Values.persistantVolume.nfs.server }}
+    path: {{ .Values.persistantVolume.nfs.path }}
+    readOnly: {{ .Values.persistantVolume.nfs.readOnly }}
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.persistantVolumeClaim.name }}
+spec:
+  accessModes: {{ .Values.persistantVolume.accessModes }}
+  volumeMode: {{ .Values.persistantVolume.volumeMode }}
+  storageClassName: {{ .Values.persistantVolume.storageClassName }}
+  resources:
+    requests:
+      storage: {{ .Values.persistantVolumeClaim.resources.requests.storage }}
