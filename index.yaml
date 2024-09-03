@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  aws-ecr-helper:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-03T11:41:00.351462724Z"
+    description: A Helm chart for Kubernetes
+    digest: 822c708c39515f342d9b6892c76a47e18d7e8158445a6624382fe4791e265eee
+    name: aws-ecr-helper
+    type: application
+    urls:
+    - https://github.com/im1xy/helm-charts/releases/download/aws-ecr-helper-0.1.0/aws-ecr-helper-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-09-03T11:41:00.351471921Z"
