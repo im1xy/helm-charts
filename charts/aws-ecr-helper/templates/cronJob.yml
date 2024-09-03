@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.cronJob.name }}
+spec:
+  schedule: {{ .Values.cronJob.schedule }}
+  successfulJobsHistoryLimit: {{ .Values.cronJob.successfulJobsHistoryLimit }}
+  suspend: {{ .Values.cronJob.suspend }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: {{ .Values.serviceAccount.account.name }}
+          restartPolicy: {{ .Values.cronJob.jobTemplate.restartPolicy }}
+          containers:
+          - name: {{ .Values.cronJob.name }}
+            image: "{{ .Values.cronJob.jobTemplate.containers.image.name }}:{{ .Values.cronJob.jobTemplate.containers.image.tag }}"
+            imagePullPolicy: {{ .Values.cronJob.imagePullPolicy }}
+            envFrom:
+              - secretRef:
+                  name: {{ .Values.sealedSecret.name }}
+              - configMapRef:
+                  name: {{ .Values.configMap.name }}
+            command:
+              - sh
+              - -c
+              - |-
+                ECR_TOKEN="$(aws ecr get-login-password --region ${AWS_REGION})"
+                NAMESPACE_NAME={{ .Values.namespace }}
+                kubectl delete secret --ignore-not-found $DOCKER_SECRET_NAME -n $NAMESPACE_NAME
+                kubectl create secret docker-registry $DOCKER_SECRET_NAME --docker-server=https://${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com --docker-username=AWS --docker-password=${ECR_TOKEN} --namespace=$NAMESPACE_NAME
+                echo "Secret was successfully updated at $(date)"

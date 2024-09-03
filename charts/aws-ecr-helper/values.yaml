@@ -1,0 +1,43 @@
+cronJob:
+  name: ecr-registry-helper
+  schedule: '"0 */15 * * *"'
+  successfulJobsHistoryLimit: '2'
+  suspend: false
+  jobTemplate:
+    restartPolicy: Never
+    containers:
+      image:
+        name: m1xy/awscli-kubectl
+        tag: latest
+      imagePullPolicy: IfNotPresent
+configMap:
+  name: ecr-registry-helper-configmap
+  data:
+    DOCKER_SECRET_NAME: aws-ecr-credentials
+sealedSecret:
+  name: ecr-registry-helper-sealedsecret
+  encryptedData:
+    AWS_SECRET_ACCESS_KEY: 
+    AWS_ACCESS_KEY_ID: 
+    AWS_ACCOUNT: 
+    AWS_REGION: 
+serviceAccount:
+  account:
+    name: service-account
+  role:
+    name: service-account-access-to-secrets
+    rules:
+    - apiGroups:
+      - ''
+      resources:
+      - secrets
+      verbs:
+      - delete
+    - apiGroups:
+      - ''
+      resources:
+      - secrets
+      verbs:
+      - create
+  roleBinding:
+    name: service-account-role-binding
