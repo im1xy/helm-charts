@@ -11,4 +11,26 @@ entries:
     urls:
     - https://github.com/im1xy/helm-charts/releases/download/aws-ecr-helper-0.1.0/aws-ecr-helper-0.1.0.tgz
     version: 0.1.0
-generated: "2024-09-03T11:41:00.351471921Z"
+  postgres:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-03T11:43:18.398199659Z"
+    description: A Helm chart for Kubernetes
+    digest: 15588e68069f3277faea36f922be022a8eb588561ec0eaed85016b55a839d276
+    name: postgres
+    type: application
+    urls:
+    - https://github.com/im1xy/helm-charts/releases/download/postgres-0.1.0/postgres-0.1.0.tgz
+    version: 0.1.0
+  redis:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-09-03T11:43:18.527978717Z"
+    description: A Helm chart for Kubernetes
+    digest: ea28345a53d0344299421c0083280c212c1aadc678ef93f8275453028402aa07
+    name: redis
+    type: application
+    urls:
+    - https://github.com/im1xy/helm-charts/releases/download/redis-0.1.0/redis-0.1.0.tgz
+    version: 0.1.0
+generated: "2024-09-03T11:43:18.527986371Z"
