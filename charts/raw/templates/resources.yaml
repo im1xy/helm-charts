@@ -1,0 +1,7 @@
+{{- range .Values.resources }}
+{{- include "counter.inc" $ }}
+{{- $newValues := merge dict $.Values $.Values.values }}
+{{- $ctx := dict "Values" $newValues }}
+{{ tpl . $ctx }}
+---
+{{- end }}
