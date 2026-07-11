@@ -2,6 +2,15 @@ apiVersion: v1
 entries:
   raw:
   - apiVersion: v2
+    created: "2026-07-11T20:46:59.205914743Z"
+    description: A Helm chart for Kubernetes
+    digest: ce96e50363f5ac1d6bb6c073783cd8eefc16c298043be50101c0db286352c724
+    name: raw
+    type: application
+    urls:
+    - raw-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2025-11-08T18:01:58.141352069Z"
     description: A Helm chart for Kubernetes
@@ -11,4 +20,4 @@ entries:
     urls:
     - raw-1.0.0.tgz
     version: 1.0.0
-generated: "2025-11-08T18:01:58.141359523Z"
+generated: "2026-07-11T20:46:59.205928509Z"
