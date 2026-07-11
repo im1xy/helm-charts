@@ -1,0 +1,10 @@
+{{- $_ := set .Values "__count" 0 }}
+
+{{- range .Values.manifests }}
+{{- include "raw.counter.inc" $ }}
+{{- include "raw.manifest" (dict
+      "manifest" .
+      "context" $
+) }}
+---
+{{- end }}

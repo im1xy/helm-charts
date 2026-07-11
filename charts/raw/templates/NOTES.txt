@@ -1,1 +1,1 @@
-Total resources created: {{ default 0 .Values.__count }}
+Total resources created: {{ .Values.__count }}
