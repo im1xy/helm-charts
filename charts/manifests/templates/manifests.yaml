@@ -1,10 +1,13 @@
 {{- $_ := set .Values "__count" 0 }}
 
-{{- range .Values.manifests }}
-{{- include "manifests.counter.inc" $ }}
-{{- include "manifests.manifest" (dict
-      "manifest" .
-      "context" $
+{{- range $manifest := splitList "\n---\n" .Values.manifests }}
+  {{- $manifest = trim $manifest }}
+  {{- if ne $manifest "" }}
+{{ include "manifests.counter.inc" $ }}
+{{ include "manifests.manifest" (dict
+    "manifest" $manifest
+    "context" $
 ) }}
 ---
+  {{- end }}
 {{- end }}
