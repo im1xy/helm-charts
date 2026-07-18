@@ -1,2 +1,2 @@
 # Helm Charts
-Repository for custom helm-charts
+Repository for im1xy's helm charts
